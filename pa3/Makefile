@@ -28,3 +28,8 @@ clean :
 
 memcheck : $(CLIENT)
 	$(MEMCHECK) $(CLIENT)
+
+send :
+	git add *
+	git commit -m 'sending from local'
+	git push
