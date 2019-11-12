@@ -30,6 +30,6 @@ memcheck : $(CLIENT)
 	$(MEMCHECK) $(CLIENT)
 
 send :
-	git add *
+	git add $(SOURCE) Makefile
 	git commit -m 'sending from local'
 	git push
