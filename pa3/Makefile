@@ -28,6 +28,3 @@ clean :
 
 memcheck : $(CLIENT)
 	$(MEMCHECK) $(CLIENT)
-
-send : 
-	
