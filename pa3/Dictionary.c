@@ -49,21 +49,21 @@ typedef struct DictionaryObj{
 } DictionaryObj;
 
 Node find(Dictionary D, char* k){
-    printf("LOG: Entered Find\n");
+    //printf("LOG: Entered Find\n");
     Node N = D->head;
-    printf("LOG: NumItems: %d\n", (D->numItems));
+    //printf("LOG: NumItems: %d\n", (D->numItems));
     int numItems = (D->numItems);
     if(numItems == 0){
-        printf("LOG: 0 items, so return NULL\n");
+        //printf("LOG: 0 items, so return NULL\n");
         return N;
     }
     for(int i = 0; i<numItems; i++){
-        printf("LOG: In the loop\n");
+        //printf("LOG: In the loop\n");
         char* k_index = N->key;
-        printf("LOG: Next Node (%s)\n", k_index);
+        //printf("LOG: Next Node (%s)\n", k_index);
         if((N->next) != NULL){
             if(strcmp(k_index, k) == 0){
-                printf("LOG: Looking for Node\n");
+                //printf("LOG: Looking for Node\n");
                 return N;
                 break;
             }
@@ -81,7 +81,7 @@ Dictionary newDictionary(){
     Dictionary D = malloc(sizeof(Dictionary));
     D->head = NULL;
     D->numItems = 0;
-    printf("LOG: Created Dictionary\n");
+    //printf("LOG: Created Dictionary\n");
     return D;
 }
 
@@ -127,14 +127,14 @@ int size(Dictionary D){
 // If D contains a pair whose key matches argument k, then return the
 // corresponding value, otherwise return NULL.
 char* lookup(Dictionary D, char* k){
-    printf("LOG: Looking up node\n");
+    //printf("LOG: Looking up node\n");
     Node N = D->head;
     if( D==NULL ){
       // fprintf(stderr,
         //  "Dictionary Error: calling get() on NULL Dictionary reference\n");
        exit(EXIT_FAILURE);
     }
-    printf("LOG: Lookup -> find\n");
+    //printf("LOG: Lookup -> find\n");
     N = find(D, k);
     if(N == NULL){
         return NULL;
@@ -149,23 +149,14 @@ char* lookup(Dictionary D, char* k){
 // Pre: lookup(D, k)==NULL (D does not contain a pair whose first member is k.)
 void insert(Dictionary D, char* k, char* v){
     Node N = NULL, P = NULL, C = NULL;
-    //Check if key already exists
-    if(lookup(D, k) != NULL){
-      //  fprintf(stderr,
-      //     "Dictionary Error: Key already exists within Dictionary\n");
-        exit(EXIT_FAILURE);
-    }
-    printf("LOG: Inserting (%s, %s) into Dictionary\n", k, v);
-    
 
-    
-    //if dictionary is empty
-    if((D->numItems) == 0){
+    P = find(D,k);
+    //if key is does not exist
+    if(P == NULL){
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
-    }else{  //if dictionary is not empty
-        P = find(D, k);
+    }else{  //if key does exist
         C = P->next;
         P->next = newNode(k, v);
         P = P->next;
