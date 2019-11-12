@@ -1,0 +1,21 @@
+Shane Ciora
+Lab3
+1449570
+
+This program is the IntegerStack ADT. This ADT allows you to do the following user functions:
+
+1. isEmpty(𝑆): Return true if stack 𝑆 is in the empty state, false otherwise.
+2. push(𝑆, 𝑥): Inserts 𝑥 on top of stack 𝑆.
+3. pop(𝑆): Delete and return the integer at top of stack 𝑆. Pre: !isEmpty(𝑆)
+4. peek(𝑆): Return integer at top of stack 𝑆. Pre: !isEmpty(𝑆)
+5. popAll(𝑆): Resets 𝑆 to the empty state. 
+
+
+Submitted Files:
+
+README
+Makefile
+IntegerStack.c
+IntegerStackTest.c
+IntegerStack.h
+

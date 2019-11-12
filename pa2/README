@@ -1,0 +1,17 @@
+Shane Ciora #1449570
+PA2
+
+------------------------------------
+This program takes up to 2 inputs:
+
+Usage: Queens [-v] number
+Option: -v verbose output, print all solutions
+
+Then will return the number of solutions to N-Queens Problem.
+------------------------------------
+
+
+Files submitted:
+Queens.c 
+Makefile
+README
