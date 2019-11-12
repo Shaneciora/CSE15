@@ -209,6 +209,11 @@ void makeEmpty(Dictionary D){
 // representation described above, followed by a terminating null '\0' char.
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
+    Node N;
+    N = D->head;
+  //  for(int i = 0; i < (D->numItems); i++){
+  //      return
+  //  }
     return 0;
 }
 
