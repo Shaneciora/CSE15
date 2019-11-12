@@ -61,13 +61,13 @@ Node find(Dictionary D, char* k){
         printf("LOG: In the loop\n");
         char* k_index = N->key;
         printf("LOG: Next Node (%s)\n", k_index);
-        if((N->key) != NULL){
+        if((N->next) != NULL){
             if(strcmp(k_index, k) == 0){
                 printf("LOG: Looking for Node\n");
                 return N;
                 break;
             }
-        N = N->next;
+            N = N->next;
         }
     }
     return NULL;
