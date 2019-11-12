@@ -169,13 +169,32 @@ void insert(Dictionary D, char* k, char* v){
 // Remove pair whose first member is the argument k from D.
 // Pre: lookup(D,k)!=NULL (D contains a pair whose first member is k.)
 void delete(Dictionary D, char* k){
+    Node N=NULL, P=NULL;
     
+    P = find(D,k);
+    //if key is does not exist
+    if(P == NULL){
+        //do nothing
+    }else{  //if key does exist
+        N = P->next;
+        P->next = N->next;
+        N->next = NULL;
+        freeNode(&N);
+    }
+    (D->numItems)--;
 }
 
 // makeEmpty()
 // Reset D to the empty state, the empty set of pairs.
 void makeEmpty(Dictionary D){
-    
+    Node N=NULL;
+    while( D->numItems > 0 ){
+       N = D->head;
+       D->head = D->head->next;
+       N->next = NULL;
+       freeNode(&N);
+       D->numItems--;
+    }
 }
 
 
