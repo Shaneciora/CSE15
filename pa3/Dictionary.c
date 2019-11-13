@@ -157,15 +157,16 @@ void insert(Dictionary D, char* k, char* v){
     }
     
 //    if(P == NULL){
-    if((D->numItems) == 0){
-        N = newNode(k, v);
-        N->next = D->head;
-        D->head = N;
-    }else{  //if key does exist
+    if((D->numItems) != 0){
         C = P->next;
         P->next = newNode(k, v);
         P = P->next;
         P->next = C;
+    }else{ 
+        printf("Inserting at front\n");
+        N = newNode(k, v);
+        N->next = D->head;
+        D->head = N;
     }
     (D->numItems)++;
 }
