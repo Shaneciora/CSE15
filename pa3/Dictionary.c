@@ -201,7 +201,15 @@ void delete(Dictionary D, char* k){
             N = NULL;
             freeNode(&N);
         }else{//if its not at the head
-            
+            //find node before the one being deleted
+            while(N->next != P){
+                N = N->next;
+            }
+            C = N; //Node before the node being deleted
+            N = N->next; //Node that is being deleted
+            C->next = N->next;
+            N = NULL;
+            freeNode(&N);
         }
         
     }
