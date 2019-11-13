@@ -57,8 +57,9 @@ Node find(Dictionary D, char* k){
         //printf("LOG: 0 items, so return NULL\n");
         return N;
     }
-    for(int i = 0; i<numItems; i++){
-        printf("LOG: In the loop\n");
+    //for(int i = 0; i<numItems; i++){
+    while(N != NULL){
+        //printf("LOG: In the loop\n");
         char* k_index;
         if((N->key) != NULL){
             k_index = N->key;
@@ -151,11 +152,11 @@ char* lookup(Dictionary D, char* k){
 // Insert the pair (k,v) into D.
 // Pre: lookup(D, k)==NULL (D does not contain a pair whose first member is k.)
 void insert(Dictionary D, char* k, char* v){
-    Node N = NULL, P = NULL;
+    Node N = NULL, P = NULL, C = NULL;
 
-    P = find(D,k);
+    C = find(D,k);
     
-    if(P != NULL){
+    if(C != NULL){
         exit(EXIT_FAILURE);
     }
     
@@ -168,14 +169,18 @@ void insert(Dictionary D, char* k, char* v){
     if((D->numItems) != 0){
         
         N = D->head;
-        while(N != NULL){
+        //while(N != NULL){
+        for(int i = 0; i<(D->numItems); i++){
+            printf("iterating\n");
             N = N->next;
         }
         P = newNode(k,v);
+        printf("inserting at end\n");
         N = P;
-        printf("inserting after head\n");
+        //printf("inserting after head\n");
 
     }else{//insert at head
+        printf("inserting at front\n");
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
