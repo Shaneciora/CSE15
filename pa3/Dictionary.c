@@ -156,7 +156,8 @@ void insert(Dictionary D, char* k, char* v){
         exit(EXIT_FAILURE);
     }
     
-    if(P == NULL){
+//    if(P == NULL){
+    if((D->numItems) == 0){
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
@@ -180,15 +181,10 @@ void delete(Dictionary D, char* k){
     if(P == NULL){
         //do nothing
     }else{  //if key does exist
-        N = P->next;
-        P->next = N;
-        N->next = NULL;
-//        N = P->next;
-//        P->next = N->next;
-//        N->next = NULL;
-//        freeNode(&N);
+
+        
     }
-    (D->numItems)--;
+    //(D->numItems)--;
 }
 
 // makeEmpty()
@@ -233,23 +229,34 @@ int countChars(Dictionary D){
 char* DictionaryToString(Dictionary D){
     int output_len = countChars(D);
     char* str = calloc(output_len+1, sizeof(char));
-    Node N;
-    N = D->head;
+    Node N = D->head;
     int i = 0;
     while(N != NULL){
         strcpy(str+i, N->key);
         i += strlen(N->key);
         str[i] = ' ';
+        i++;
         strcpy(str+i, N->value);
         i += strlen(N->value);
         str[i] = '\n';
-        i += 2;
+        i++;
         N = N->next;
+        //printf("iterating\n");
+//        strcpy(str, N->key);
+//        printf("1: %s\n", str);
+//        i += strlen(N->key);
+//        str[i] = ' ';
+//        i++;
+//        printf("i: %d\n", i);
+//        strcpy(str, N->value);
+//        i += strlen(N->value);
+//        str[i] = '\n';
+//        i++;
+//        printf("2: %s\n", str);
+//        N = N->next;
     }
-    
+    if( (D->numItems)>0 ) i--;
     str[i] = '\0';  // overwrite last space with terminating null '\0'
-  //  for(int i = 0; i < (D->numItems); i++){
-  //      return
-  //  }
+
     return str;
 }
