@@ -156,27 +156,28 @@ void insert(Dictionary D, char* k, char* v){
         exit(EXIT_FAILURE);
     }
     
-    N = newNode(k, v);
-    N->next = D->head;
-    D->head = N;
-    (D->numItems)++;
-    
-    
-////    if(P == NULL){
-//    if((D->numItems) != 0){
-//        N = D->head;
-//        while(N != NULL){
-//            N = N->next;
-//        }
-//        P = newNode(k,v);
-//        N = P;
-//
-//    }else{
-//        N = newNode(k, v);
-//        N->next = D->head;
-//        D->head = N;
-//    }
+//    N = newNode(k, v);
+//    N->next = D->head;
+//    D->head = N;
 //    (D->numItems)++;
+    
+    //not at head
+    if((D->numItems) != 0){
+        
+        N = D->head;
+        while(N != NULL){
+            N = N->next;
+        }
+        P = newNode(k,v);
+        N = P;
+        printf("inserting after head\n");
+
+    }else{//insert at head
+        N = newNode(k, v);
+        N->next = D->head;
+        D->head = N;
+    }
+    (D->numItems)++;
 }
 
 // delete()
