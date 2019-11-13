@@ -197,6 +197,21 @@ void makeEmpty(Dictionary D){
     }
 }
 
+int countChars(Dictionary D){
+    Node N;
+     N = D->head;
+     int output_len = 0;
+     while(N != NULL){
+         int k_len = strlen(N->key);
+         int v_len = strlen(N->value);
+         output_len += k_len;
+         output_len += v_len;
+         output_len += 3;
+         N = N->next;
+     }
+    
+    return output_len;
+}
 
 // Other Operations -----------------------------------------------------------
 
@@ -209,12 +224,27 @@ void makeEmpty(Dictionary D){
 // representation described above, followed by a terminating null '\0' char.
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
+    int output_len = countChars(D);
+    char* str = calloc(output_len+1, sizeof(char));
     Node N;
     N = D->head;
+    int i = 0;
+    while(N != NULL){
+        strcpy(str+i, N->key);
+        i += strlen(N->key);
+        str[i] = ' ';
+        strcpy(str+i, N->value);
+        i += strlen(N->value);
+        str[i] = '\n';
+        i += 2;
+        N = N->next;
+    }
+    
+    str[i] = '\0';  // overwrite last space with terminating null '\0'
   //  for(int i = 0; i < (D->numItems); i++){
   //      return
   //  }
-    return 0;
+    return str;
 }
 
 
