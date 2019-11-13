@@ -171,10 +171,14 @@ void insert(Dictionary D, char* k, char* v){
                 N->next = P;
             }
         }
+        P = NULL;
+        freeNode(&P);
     }else{//insert at head
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
+        N = NULL;
+        freeNode(&N);
     }
     (D->numItems)++;
 }
