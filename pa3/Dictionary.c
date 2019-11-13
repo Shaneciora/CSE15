@@ -169,14 +169,19 @@ void insert(Dictionary D, char* k, char* v){
     if((D->numItems) != 0){
         
         N = D->head;
+        P = newNode(k,v);
+        printf("inserting at end\n");
+       
         //while(N != NULL){
         for(int i = 0; i<(D->numItems); i++){
             printf("iterating\n");
-            N = N->next;
+            if(N!=NULL){
+                N = N->next;
+            }else{
+                 N->next = P;
+            }
         }
-        P = newNode(k,v);
-        printf("inserting at end\n");
-        N = P;
+
         //printf("inserting after head\n");
 
     }else{//insert at head
