@@ -160,32 +160,18 @@ void insert(Dictionary D, char* k, char* v){
         exit(EXIT_FAILURE);
     }
     
-//    N = newNode(k, v);
-//    N->next = D->head;
-//    D->head = N;
-//    (D->numItems)++;
-    
     //not at head
     if((D->numItems) != 0){
-        
         N = D->head;
         P = newNode(k,v);
-        printf("inserting at end\n");
-       
-        //while(N != NULL){
         for(int i = 0; i<(D->numItems); i++){
-            printf("iterating\n");
-            if(N!=NULL){
+            if(N->next != NULL){
                 N = N->next;
             }else{
-                 N->next = P;
+                N->next = P;
             }
         }
-
-        //printf("inserting after head\n");
-
     }else{//insert at head
-        printf("inserting at front\n");
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
@@ -205,9 +191,9 @@ void delete(Dictionary D, char* k){
     if(P == NULL){
         //do nothing
     }else{  //if key does exist
-        N = P->next;
-        freeNode(&P);
-        P = N;
+        //if its at the head
+        
+        //if its not at the head
     }
     //(D->numItems)--;
 }
