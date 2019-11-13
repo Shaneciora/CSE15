@@ -183,7 +183,7 @@ void insert(Dictionary D, char* k, char* v){
 // Remove pair whose first member is the argument k from D.
 // Pre: lookup(D,k)!=NULL (D contains a pair whose first member is k.)
 void delete(Dictionary D, char* k){
-   // Node N=NULL;
+    Node N=NULL;
     Node P=NULL;
     
     P = find(D,k);
@@ -191,8 +191,9 @@ void delete(Dictionary D, char* k){
     if(P == NULL){
         //do nothing
     }else{  //if key does exist
-
-        
+        N = P->next;
+        freeNode(&P);
+        P = N;
     }
     //(D->numItems)--;
 }
