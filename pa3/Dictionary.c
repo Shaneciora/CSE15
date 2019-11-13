@@ -222,6 +222,8 @@ int countChars(Dictionary D){
          output_len += 3;
          N = N->next;
      }
+    //for newline char
+    output_len++;
     
     return output_len;
 }
@@ -254,7 +256,8 @@ char* DictionaryToString(Dictionary D){
         N = N->next;
     }
     if( (D->numItems)>0 ) i--;
-    str[i] = '\0';  // overwrite last space with terminating null '\0'
+    str[i] = '\n';
+    str[i+1] = '\0';  // overwrite last space with terminating null '\0'
 
     return str;
 }
