@@ -175,15 +175,14 @@ void insert(Dictionary D, char* k, char* v){
 void delete(Dictionary D, char* k){
     Node N=NULL, P=NULL;
     
-    N = find(D,k);
+    P = find(D,k);
     //if key is does not exist
-    if(N == NULL){
+    if(P == NULL){
         //do nothing
     }else{  //if key does exist
-        P = N->next;
-        N = N->next;
-        N->next = P;
-        free(&P);
+        N = P->next;
+        P->next = N;
+        N->next = NULL;
 //        N = P->next;
 //        P->next = N->next;
 //        N->next = NULL;
