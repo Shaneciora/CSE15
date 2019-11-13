@@ -158,12 +158,14 @@ void insert(Dictionary D, char* k, char* v){
     
 //    if(P == NULL){
     if((D->numItems) != 0){
-        C = P->next;
-        P->next = newNode(k, v);
-        P = P->next;
-        P->next = C;
-    }else{ 
-        printf("Inserting at front\n");
+        N = D->head;
+        while(N != NULL){
+            N = N->next;
+        }
+        P = newNode(k,v);
+        N = P;
+        
+    }else{
         N = newNode(k, v);
         N->next = D->head;
         D->head = N;
@@ -228,6 +230,7 @@ int countChars(Dictionary D){
 // representation described above, followed by a terminating null '\0' char.
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
+    printf("LOG: Printing\n");
     int output_len = countChars(D);
     char* str = calloc(output_len+1, sizeof(char));
     Node N = D->head;
@@ -242,19 +245,6 @@ char* DictionaryToString(Dictionary D){
         str[i] = '\n';
         i++;
         N = N->next;
-        //printf("iterating\n");
-//        strcpy(str, N->key);
-//        printf("1: %s\n", str);
-//        i += strlen(N->key);
-//        str[i] = ' ';
-//        i++;
-//        printf("i: %d\n", i);
-//        strcpy(str, N->value);
-//        i += strlen(N->value);
-//        str[i] = '\n';
-//        i++;
-//        printf("2: %s\n", str);
-//        N = N->next;
     }
     if( (D->numItems)>0 ) i--;
     str[i] = '\0';  // overwrite last space with terminating null '\0'
