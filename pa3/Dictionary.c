@@ -205,7 +205,7 @@ void delete(Dictionary D, char* k){
         }
         
     }
-    //(D->numItems)--;
+    (D->numItems)--;
 }
 
 // makeEmpty()
