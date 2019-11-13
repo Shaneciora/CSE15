@@ -148,7 +148,7 @@ char* lookup(Dictionary D, char* k){
 // Insert the pair (k,v) into D.
 // Pre: lookup(D, k)==NULL (D does not contain a pair whose first member is k.)
 void insert(Dictionary D, char* k, char* v){
-    Node N = NULL, P = NULL, C = NULL;
+    Node N = NULL, P = NULL;
 
     P = find(D,k);
     
@@ -183,7 +183,8 @@ void insert(Dictionary D, char* k, char* v){
 // Remove pair whose first member is the argument k from D.
 // Pre: lookup(D,k)!=NULL (D contains a pair whose first member is k.)
 void delete(Dictionary D, char* k){
-    Node N=NULL, P=NULL;
+   // Node N=NULL;
+    Node P=NULL;
     
     P = find(D,k);
     //if key is does not exist
@@ -236,7 +237,7 @@ int countChars(Dictionary D){
 // representation described above, followed by a terminating null '\0' char.
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
-    printf("LOG: Printing\n");
+    //printf("LOG: Printing\n");
     int output_len = countChars(D);
     char* str = calloc(output_len+1, sizeof(char));
     Node N = D->head;
