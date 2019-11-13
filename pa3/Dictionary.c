@@ -1,6 +1,6 @@
 //
 //  Dictionary.c
-//  
+//
 //
 
 #include<stdio.h>
@@ -10,13 +10,6 @@
 #include<assert.h>
 #include"Dictionary.h"
 
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN    "\x1b[36m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
 
 // Private Types and Functions ------------------------------------------------
 
@@ -56,20 +49,20 @@ typedef struct DictionaryObj{
 } DictionaryObj;
 
 Node find(Dictionary D, char* k){
-    printf(ANSI_COLOR_YELLOW "FIND: Finding key [%s]\n" ANSI_COLOR_RESET, k);
+    //printf("LOG: Entered Find\n");
     Node N = D->head;
     //printf("LOG: NumItems: %d\n", (D->numItems));
     int numItems = (D->numItems);
-//    if(numItems == 0){
-//        printf("LOG: 0 items, so return NULL\n");
-//        return NULL;
-//    }
-    
+    if(numItems == 0){
+        //printf("LOG: 0 items, so return NULL\n");
+        return N;
+    }
     for(int i = 0; i<numItems; i++){
         //printf("LOG: In the loop\n");
+        char* k_index = N->key;
         //printf("LOG: Next Node (%s)\n", k_index);
         if(N != NULL){
-            if(strcmp(k, N->key) == 0){
+            if(strcmp(k_index, k) == 0){
                 //printf("LOG: Looking for Node\n");
                 return N;
                 break;
@@ -134,11 +127,14 @@ int size(Dictionary D){
 // If D contains a pair whose key matches argument k, then return the
 // corresponding value, otherwise return NULL.
 char* lookup(Dictionary D, char* k){
+    //printf("LOG: Looking up node\n");
     Node N = D->head;
     if( D==NULL ){
+      // fprintf(stderr,
+        //  "Dictionary Error: calling get() on NULL Dictionary reference\n");
        exit(EXIT_FAILURE);
     }
-    
+    //printf("LOG: Lookup -> find\n");
     N = find(D, k);
     if(N == NULL){
         return NULL;
@@ -152,45 +148,25 @@ char* lookup(Dictionary D, char* k){
 // Insert the pair (k,v) into D.
 // Pre: lookup(D, k)==NULL (D does not contain a pair whose first member is k.)
 void insert(Dictionary D, char* k, char* v){
-    printf(ANSI_COLOR_GREEN "INSERT: Inserting (%s, %s)\n" ANSI_COLOR_RESET, k, v);
     Node N = NULL, P = NULL, C = NULL;
-    P = find(D,k);
 
+    P = find(D,k);
+    
     if(P != NULL){
         exit(EXIT_FAILURE);
     }
     
-//    printf("\x1b[31m" "LOG: Key does not exist, creating new Node of (%s, %s)" "\x1b[0m" "\n", k, v);
-//    if(D->head == NULL){
-//        printf("\x1b[33m" "Head is empty, so create one" "\x1b[0m" "\n");
-//        N = newNode(k, v);
-//        D->head = N;
-//        (D->numItems++);
-//    }else{
-//        printf("\x1b[32m" "Head is NOT empty, adding entry" "\x1b[0m" "\n");
-//        N = D->head;
-//        while(N != NULL){
-//            N = N->next;
-//        }
-//        N = newNode(k, v);
-//        (D->numItems++);
-//    }
-    
-    
-    
-    N = newNode(k, v);
-    N->next = D->head;
-    D->head = N;
+    if(P == NULL){
+        N = newNode(k, v);
+        N->next = D->head;
+        D->head = N;
+    }else{  //if key does exist
+        C = P->next;
+        P->next = newNode(k, v);
+        P = P->next;
+        P->next = C;
+    }
     (D->numItems)++;
-    
-    
-//    else{  //if key does exist
-//        printf("\x1b[31m" "LOG: Key does exist, creating new link (%s, %s)" "\x1b[0m" "\n", k, v);
-//        C = P->next;
-//        P->next = newNode(k, v);
-//        P = P->next;
-//        P->next = C;
-//    }
 }
 
 // delete()
@@ -199,15 +175,19 @@ void insert(Dictionary D, char* k, char* v){
 void delete(Dictionary D, char* k){
     Node N=NULL, P=NULL;
     
-    P = find(D,k);
+    N = find(D,k);
     //if key is does not exist
-    if(P == NULL){
+    if(N == NULL){
         //do nothing
     }else{  //if key does exist
-        N = P->next;
-        P->next = N->next;
-        N->next = NULL;
-        freeNode(&N);
+        P = N->next;
+        N = N->next;
+        N->next = P;
+        free(&P);
+//        N = P->next;
+//        P->next = N->next;
+//        N->next = NULL;
+//        freeNode(&N);
     }
     (D->numItems)--;
 }
@@ -253,7 +233,6 @@ int countChars(Dictionary D){
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
     int output_len = countChars(D);
-    printf(ANSI_COLOR_CYAN "Making array size of %d\n" ANSI_COLOR_RESET, output_len);
     char* str = calloc(output_len+1, sizeof(char));
     Node N;
     N = D->head;
@@ -275,7 +254,3 @@ char* DictionaryToString(Dictionary D){
   //  }
     return str;
 }
-
-
-
-
