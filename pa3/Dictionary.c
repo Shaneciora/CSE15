@@ -58,8 +58,11 @@ Node find(Dictionary D, char* k){
         return N;
     }
     for(int i = 0; i<numItems; i++){
-        //printf("LOG: In the loop\n");
-        char* k_index = N->key;
+        printf("LOG: In the loop\n");
+        char* k_index;
+        if((N->key) != NULL){
+            k_index = N->key;
+        }
         //printf("LOG: Next Node (%s)\n", k_index);
         if(N != NULL){
             if(strcmp(k_index, k) == 0){
