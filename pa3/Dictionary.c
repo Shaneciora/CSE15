@@ -49,14 +49,15 @@ typedef struct DictionaryObj{
 } DictionaryObj;
 
 Node find(Dictionary D, char* k){
-    //printf("LOG: Entered Find\n");
+    printf("LOG: Finding key [%s]\n", k);
     Node N = D->head;
     //printf("LOG: NumItems: %d\n", (D->numItems));
     int numItems = (D->numItems);
-    if(numItems == 0){
-        //printf("LOG: 0 items, so return NULL\n");
-        return N;
-    }
+//    if(numItems == 0){
+//        printf("LOG: 0 items, so return NULL\n");
+//        return NULL;
+//    }
+    
     for(int i = 0; i<numItems; i++){
         //printf("LOG: In the loop\n");
         char* k_index = N->key;
@@ -148,21 +149,45 @@ char* lookup(Dictionary D, char* k){
 // Insert the pair (k,v) into D.
 // Pre: lookup(D, k)==NULL (D does not contain a pair whose first member is k.)
 void insert(Dictionary D, char* k, char* v){
+    printf("LOG: Inserting (%s, %s)\n", k, v);
     Node N = NULL, P = NULL, C = NULL;
-
     P = find(D,k);
-    //if key is does not exist
-    if(P == NULL){
-        N = newNode(k, v);
-        N->next = D->head;
-        D->head = N;
-    }else{  //if key does exist
-        C = P->next;
-        P->next = newNode(k, v);
-        P = P->next;
-        P->next = C;
+
+    if(P != NULL){
+        exit(EXIT_FAILURE);
     }
-    (D->numItems)++;
+    
+    printf("\x1b[31m" "LOG: Key does not exist, creating new Node of (%s, %s)" "\x1b[0m" "\n", k, v);
+    if(D->head == NULL){
+        printf("\x1b[33m" "Head is empty, so create one" "\x1b[0m" "\n");
+        N = newNode(k, v);
+        D->head = N;
+        (D->numItems++);
+    }else{
+        printf("\x1b[32m" "Head is NOT empty, adding entry" "\x1b[0m" "\n");
+        N = D->head;
+        while(N != NULL){
+            N = N->next;
+        }
+        N->next = newNode(k, v);
+        (D->numItems++);
+    }
+    
+    
+    
+//    N = newNode(k, v);
+//    N->next = D->head;
+//    D->head = N;
+//    (D->numItems)++;
+    
+    
+//    else{  //if key does exist
+//        printf("\x1b[31m" "LOG: Key does exist, creating new link (%s, %s)" "\x1b[0m" "\n", k, v);
+//        C = P->next;
+//        P->next = newNode(k, v);
+//        P = P->next;
+//        P->next = C;
+//    }
 }
 
 // delete()
@@ -225,6 +250,7 @@ int countChars(Dictionary D){
 // It is the responsibility of the calling function to free this memory.
 char* DictionaryToString(Dictionary D){
     int output_len = countChars(D);
+    printf("Making array size of %d\n", output_len);
     char* str = calloc(output_len+1, sizeof(char));
     Node N;
     N = D->head;
