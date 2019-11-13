@@ -1,0 +1,26 @@
+CSE 15 - FALL19
+
+Shane Ciora 1449570
+
+PA3
+
+Dictionary ADT
+
+This program is the Dictionary ADT and a test client to impliment it. The dictionary is used by creating one, then adding elements that contain a key and value combination. The user then can retrieve specific elements within the dictionary to use on the client side. Public Functions inlcude:
+
+size(D)
+looup(D, k)
+delete(D, k)
+insert(D, k)
+makeEmpty(D)
+newDictionary()
+freeDictionary(D)
+DictionaryToString(D);
+
+
+Files submitted:
+README
+Dictionary.h
+Dictionary.c
+DictionaryTest.c
+Makefile
