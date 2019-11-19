@@ -8,6 +8,7 @@ FLAGS        = -std=c99 -Wall
 SOURCE       = $(PROGRAM_NAME).c
 OBJECT       = $(PROGRAM_NAME).o
 EXEBIN       = $(PROGRAM_NAME)
+SUBMIT	     = submit cse015-pt.f19 $(ASSIGNMENT)
 
 $(EXEBIN) : $(OBJECT)
 	gcc -o $(EXEBIN) $(OBJECT)
