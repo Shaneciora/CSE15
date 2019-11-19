@@ -1,0 +1,9 @@
+Shane Ciora
+ID: 1449570
+
+This program takes a in file, then applies function pointers to do specific math functions.
+
+Submitted files:
+ArithmeticOperations.C
+README
+Makefile

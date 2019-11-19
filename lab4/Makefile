@@ -2,6 +2,7 @@
 # Makefile for any C program
 #------------------------------------------------------------------------------
 
+ASSIGNMENT   = lab4
 PROGRAM_NAME = ArithmeticOperations
 FLAGS        = -std=c99 -Wall
 SOURCE       = $(PROGRAM_NAME).c
@@ -19,3 +20,6 @@ clean :
 
 memcheck : $(EXEBIN)
 	valgrind --leak-check=full $(EXEBIN) in1
+
+submit :
+	$(SUBMIT) ArithmeticOperations.c README Makefile

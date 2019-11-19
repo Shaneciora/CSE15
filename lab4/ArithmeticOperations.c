@@ -150,6 +150,10 @@ int main(int argc, char* argv[]){
 //    print_line(line1, 1);
 //    print_line(line2, n);
 //    print_line(line3, n+1);
+    
+    free(line1);
+    free(line2);
+    free(line3);
 
     return EXIT_SUCCESS;
 }
