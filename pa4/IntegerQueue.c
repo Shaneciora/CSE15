@@ -107,19 +107,19 @@ void enqueue(IntegerQueue Q, int x){
     
     //If Queue is empty
     if(isEmpty(Q) == 1){
-        printf("[LOG]: enqueue(%d) to EMPTY queue\n", x);
+        //printf("[LOG]: enqueue(%d) to EMPTY queue\n", x);
         Q->front = N;
         Q->back = N;
-        printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
+        //printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
     }else{  //If Queue is NOT empty
-        printf("[LOG]: enqueue(%d) to NON-EMPTY queue\n", x);
+        //printf("[LOG]: enqueue(%d) to NON-EMPTY queue\n", x);
         Q->back->next = N;
         Q->back = N;
-        printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
+        //printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
     }
     Q->numItems++;
-    printf("[LOG]: numItems = %d\n", Q->numItems);
-    printf("----------------------------------------------\n");
+    //printf("[LOG]: numItems = %d\n", Q->numItems);
+    //printf("----------------------------------------------\n");
 }
 
 // dequeue()
@@ -133,15 +133,15 @@ int dequeue(IntegerQueue Q){
     }else{
         Node N = Q->front;
         item = N->key;
-        printf("[LOG]: dequeue(%d) from queue\n", item);
+        //printf("[LOG]: dequeue(%d) from queue\n", item);
         Q->front = Q->front->next;
         freeNode(&N);
         Q->numItems--;
         
-        printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
+        //printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
     }
-    printf("[LOG]: numItems = %d\n", Q->numItems);
-    printf("----------------------------------------------\n");
+    //printf("[LOG]: numItems = %d\n", Q->numItems);
+    //printf("----------------------------------------------\n");
     return item;
 }
 
