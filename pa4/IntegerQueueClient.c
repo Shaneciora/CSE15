@@ -4,87 +4,98 @@
 //-----------------------------------------------------------------------------
 #include<stdio.h>
 #include<stdlib.h>
-#include"IntegerQueue.h" 
+#include"IntegerQueue.h"
 
 int main(){
 
-   int i, j;
-   char* strA;
-   char* strB;
+    int i, j;
+    char* strA;
+    char* strB;
+    char* strC;
 
-   IntegerQueue A = newIntegerQueue();
-   IntegerQueue B = newIntegerQueue();
+    IntegerQueue A = newIntegerQueue();
+    IntegerQueue B = newIntegerQueue();
+    IntegerQueue C = newIntegerQueue();
 
-   printf("%s\n", isEmpty(A)?"true":"false");
-   printf("%s\n", isEmpty(B)?"true":"false");
+    printf("%s\n", isEmpty(A)?"true":"false");
+    printf("%s\n", isEmpty(B)?"true":"false");
+    printf("%s\n", isEmpty(C)?"true":"false");
 
-   enqueue(A, 5);
-   enqueue(A, 3);
-   enqueue(A, 9);
-   enqueue(A, 7);
-   enqueue(A, 8);
+    enqueue(C, 5);
+    enqueue(C, 3);
+    enqueue(A, 9);
+    enqueue(A, 7);
+    enqueue(A, 8);
 
-   printf("%s\n", isEmpty(A)?"true":"false");
+    printf("%s\n", isEmpty(C)?"true":"false");
+    printf("%s\n", isEmpty(A)?"true":"false");
+    
+    strC = IntegerQueueToString(C);
+    printf("%s\n", strC);
+    free(strC);
+    
+    strA = IntegerQueueToString(A);
+    printf("%s\n", strA);
+    free(strA);
 
-   strA = IntegerQueueToString(A);
-   printf("%s\n", strA);
-   free(strA);
 
-   printf("%d\n", peek(A));
-   dequeue(A);
-   dequeue(A);
-   dequeue(A);
-   printf("%d\n", peek(A));
+    printf("%d\n", peek(A));
+    
+    dequeue(A);
+    dequeue(A);
+    dequeue(A);
+    
+    printf("%d\n", peek(A));
+    
+    strA = IntegerQueueToString(A);
+    printf("PRINT A: %s\n", strA);
+    free(strA);
 
-   strA = IntegerQueueToString(A);
-   printf("%s\n", strA);
-   free(strA);
+    enqueue(B, 7);
+    enqueue(B, 8);
 
-   enqueue(B, 7);
-   enqueue(B, 8);
+    strB = IntegerQueueToString(B);
+    printf("PRINT B: %s\n", strB);
+    free(strB);
 
-   strB = IntegerQueueToString(B);
-   printf("%s\n", strB);
-   free(strB);
+    printf("%s\n", equals(A, B)?"true":"false");
 
-   printf("%s\n", equals(A, B)?"true":"false");
+    enqueue(A, 12);
+    enqueue(B, 13);
 
-   enqueue(A, 12);
-   enqueue(B, 13);
+    strA = IntegerQueueToString(A);
+    printf("%s\n", strA);
+    free(strA);
 
-   strA = IntegerQueueToString(A);
-   printf("%s\n", strA);
-   free(strA);
+    strB = IntegerQueueToString(B);
+    printf("%s\n", strB);
+    free(strB);
 
-   strB = IntegerQueueToString(B);
-   printf("%s\n", strB);
-   free(strB);
+    printf("%s\n", equals(A, B)?"true":"false");
 
-   printf("%s\n", equals(A, B)?"true":"false");
+    dequeueAll(A);
+    dequeueAll(B);
+    printf("%s\n", isEmpty(A)?"true":"false");
+    printf("%s\n", isEmpty(B)?"true":"false");
 
-   dequeueAll(A);
-   dequeueAll(B);
-   printf("%s\n", isEmpty(A)?"true":"false");
-   printf("%s\n", isEmpty(B)?"true":"false");
+    freeIntegerQueue(&A);
+    freeIntegerQueue(&B);
 
-   freeIntegerQueue(&A);
-   freeIntegerQueue(&B);
+    A = newIntegerQueue();
+    B = newIntegerQueue();
 
-   A = newIntegerQueue();
-   B = newIntegerQueue();
-
-   for(i=0; i<10; i++){
+    for(i=0; i<10; i++){
       enqueue(A, i);
-   }
+    }
 
-   strA = IntegerQueueToString(A);
-   strB = IntegerQueueToString(B);
-   printf("A: %s\n", strA);
-   printf("B: %s\n", strB);
-   free(strA);
-   free(strB);
+    strA = IntegerQueueToString(A);
+    strB = IntegerQueueToString(B);
+    printf("A: %s\n", strA);
+    printf("B: %s\n", strB);
+    free(strA);
+    free(strB);
 
-   while( !isEmpty(A) ){
+    while( !isEmpty(A) ){
       j = dequeue(A);
       enqueue(B, j);
       if( j%3==0 ){
@@ -97,12 +108,12 @@ int main(){
       printf("B: %s\n", strB);
       free(strA);
       free(strB);
-   }
+    }
 
-   freeIntegerQueue(&A);
-   freeIntegerQueue(&B);
+    freeIntegerQueue(&A);
+    freeIntegerQueue(&B);
 
-   return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 /* Output of this program: ****************************************************
