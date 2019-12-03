@@ -45,6 +45,21 @@ void freeNode(Node* pN){
 
 // Constructors-Destructors ---------------------------------------------------
 
+void deleteAll(IntegerQueue Q){
+   Node N = NULL;
+   if( Q == NULL ){
+      exit(EXIT_FAILURE);
+   }
+
+   while( Q->numItems > 0 ){
+      N = Q->front;
+      Q->front = Q->front->next;
+      N->next = NULL;
+      freeNode(&N);
+      Q->numItems--;
+   }
+}
+
 IntegerQueue newIntegerQueue(){
     IntegerQueue Q = malloc(sizeof(IntegerQueue));
     Q->numItems = 0;
@@ -53,8 +68,14 @@ IntegerQueue newIntegerQueue(){
     return Q;
 }
 
+// freeIntegerQueue()
+// Destructor for the Queue ADT
 void freeIntegerQueue(IntegerQueue* pQ){
-    
+    if( pQ!=NULL && *pQ!=NULL ){
+        //deleteAll(*pD);
+        free(*pQ);
+        *pQ = NULL;
+    }
 }
 
 // ADT operations -------------------------------------------------------------
