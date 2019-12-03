@@ -133,10 +133,15 @@ int dequeue(IntegerQueue Q){
     }else{
         Node N = Q->front;
         item = N->key;
+        printf("[LOG]: dequeue(%d) from queue\n", item);
         Q->front = Q->front->next;
         freeNode(&N);
         Q->numItems--;
+        
+        printf("[LOG]: Front = %d         Back = %d\n", Q->front->key, Q->back->key);
     }
+    printf("[LOG]: numItems = %d\n", Q->numItems);
+    printf("----------------------------------------------\n");
     return item;
 }
 
