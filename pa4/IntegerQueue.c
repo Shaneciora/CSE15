@@ -144,7 +144,12 @@ int dequeue(IntegerQueue Q){
 // Returns the item at front of Q.
 // Pre: !isEmpty()
 int peek(IntegerQueue Q){
-    return Q->front->key;
+    if(isEmpty(Q) == 1){
+        exit(EXIT_FAILURE);
+    }else{
+        return Q->front->key;
+    }
+    
 }
 
 // dequeueAll()
